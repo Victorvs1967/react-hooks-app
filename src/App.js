@@ -1,24 +1,22 @@
-import logo from './logo.svg';
+import React, { useContext } from 'react';
+
 import './App.css';
 
-function App() {
+import RecipeList from './components/RecipeList';
+import { RecipeContext } from './context/index';
+
+const App = () => {
+
+  const appContext = useContext(RecipeContext);
+  const { loading, search } = appContext;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {
+        loading ? <h2 className="text-center">...loading {search} recipes</h2> :
+        <RecipeList />
+      }
+    </>
   );
 }
 
